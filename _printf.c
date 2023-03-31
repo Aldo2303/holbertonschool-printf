@@ -7,7 +7,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int count = 0, x = 0, y = 0, z = 0;
+	int count = 0, x = 0;
 	va_list args;
 
 	va_start(args, format);
@@ -21,19 +21,21 @@ int _printf(const char *format, ...)
 		if (format[x] == '%')
 		{
 			/*only looking at the next argument, but not moving*/
-			if (format[x + 1] != '\0')
+			if (format[x + 1] == '\0')
+			{
+				return (count);
+			}
+			else
 			{
 				/*goes to get_sp function, executes and stores return in y*/
-				y = get_sp(args, format[x + 1]);
-				count = count + y;
+				count += get_sp(args, format[x + 1]);
 				/*moves to next argument, the one that was being looked*/
 				x++;
 			}
-			x++;
 		}
-		/*writes while format[x] is not '%' and stores return in z*/
-		z = _write(format[x]);
-		count = count + z;
+		else
+			/*writes while format[x] is not '%' and stores return in z*/
+			count += _write(format[x]);
 		x++;
 	}
 	va_end(args);
