@@ -54,24 +54,22 @@ int print_percent(__attribute__((unused)) va_list args)
  */
 int print_int(va_list args)
 {
-	int count, num, abs;
+	int count, num, abso;
 
 	count = 0;
 	num = va_arg(args, int);
-
-	if (num < 0)
-		abs = -num;
-	abs = num;
+	abso = num;
 
 	if (num < 0)
 	{
+		abso = abso * -1;
 		_write('-');
 		count++;
 	}
 
-	while (abs >= 10)
+	while (abso >= 10)
 	{
-		abs = abs / 10;
+		abso = abso / 10;
 		count++;
 	}
 
@@ -85,13 +83,13 @@ int print_int(va_list args)
  */
 void print_int_rec(int num)
 {
-	unsigned int abs; /* chequear si no conviene cambiarle el nombre */
+	unsigned int uns_num; /* chequear si no conviene cambiarle el nombre */
 
+	uns_num = num;
 	if (num < 0)
-		abs = -num;
-	abs = num;
+		uns_num = uns_num * -1;
 
-	if (abs >= 10)
-		print_int_rec(abs / 10);
-	_write((abs % 10) + '0');
+	if (uns_num >= 10)
+		print_int_rec(uns_num / 10);
+	_write((uns_num % 10) + '0');
 }

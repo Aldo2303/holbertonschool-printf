@@ -26,7 +26,6 @@ int _printf(const char *format, ...)
 			}
 			x++;
 		}
-		_write(format[x]);
 		z = _write(format[x]); /* chequear si al guardarlo ya no printea */
 		count = count + z;
 		x++;
