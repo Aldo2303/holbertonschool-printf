@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 			/*only looking at the next argument, but not moving*/
 			if (format[x + 1] == '\0')
 			{
-				return (count);
+				return (-1);
 			}
 			else
 			{
