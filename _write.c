@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * _write - prints a char on stdo
  * @c: char to be printed
