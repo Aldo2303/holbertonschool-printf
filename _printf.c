@@ -7,46 +7,30 @@
 
 int _printf(const char *format, ...)
 {
-	int count = 0, x = 0, y = 0;
+	int count = 0, x = 0, y = 0, z = 0;
 	va_list args;
-
-	option_t changes[] = {
-		{'c', print_char},
-		{'s', print_string},
-		{'%', print_percent},
-		{'\0', print_null}
-	};
 
 	va_start(args, format);
 	if (format == NULL)
-	{
-		va_end(args);
 		return (-1);
-	}
 
 	while (format[x] != '\0')
 	{
-		if (format[x] != '%')
+		if (format[x] == '%')
 		{
-			_write(format[x]);
-			x++;
-			count++; /* ver si va aqui o en el loop while */
-		}
-		if (format[x + 1] != '\0')
-		{
-			while (changes[y].index != '\0')
+			if (format[x + 1] != '\0')
 			{
-				if (changes[y].index == format[x + 1])
-				{
-					changes[y].function(args);
-				}
-				y++;
+				y = get_sp(args, format[x + 1]);
+				count = count + y;
+				x++;
 			}
-			count++;
-			/* ejecutar func 4 */
+			x++;
 		}
 		_write(format[x]);
+		z = _write(format[x]); /* chequear si al guardarlo ya no printea */
+		count = count + z;
+		x++;
 	}
-	va_end(args); /* ver si va o no */
+	va_end(args);
 	return (count);
 }
