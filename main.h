@@ -25,5 +25,6 @@ int print_int(va_list args);
 void print_int_rec(int num);
 int get_sp(va_list args, char letter);
 int _write(char c);
+int _printf(const char *format, ...);
 
 #endif
