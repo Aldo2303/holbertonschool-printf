@@ -58,27 +58,28 @@ int print_percent(__attribute__((unused)) va_list args)
  */
 int print_int(va_list args)
 {
-	int count, num, abso;
+	int count, abso;
+	unsigned int num;
 
-	count = 0;
+	count = 1;
 	num = va_arg(args, int);
 	abso = num;
 
-	if (num < 0)
+	if (abso < 0)
 	{
 		/* so it doesn't store the '-' sign */
 		abso = abso * -1;
 		_write('-');
 		count++;
 	}
-	/* abso >= 10 so it can be divided by 10 */
-	while (abso >= 10)
+	/* num >= 10 so it can be divided by 10 */
+	while (num >= 10)
 	{
-		abso = abso / 10;
+		num = num / 10;
 		count++;
 	}
 	/* call the recursive function */
-	print_int_rec(num);
+	print_int_rec(abso);
 	return (count);
 }
 
