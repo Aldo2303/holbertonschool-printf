@@ -7,8 +7,10 @@
  */
 int print_char(va_list args)
 {
+	/* Keeps a char from the va_list and stores it in char c*/
 	char c = va_arg(args, int);
 
+	/* Returns the length and writes */
 	return (_write(c));
 }
 
@@ -20,6 +22,7 @@ int print_char(va_list args)
 int print_string(va_list args)
 {
 	int a = 0;
+	/* define a char pointer to store the string */
 	char *string;
 
 	string = va_arg(args, char*);
@@ -32,6 +35,7 @@ int print_string(va_list args)
 		_write(string[a]);
 		a++;
 	}
+	/* at this point, a stores the length of string */
 	return (a);
 }
 
@@ -54,27 +58,26 @@ int print_percent(__attribute__((unused)) va_list args)
  */
 int print_int(va_list args)
 {
-	int count, num, abs;
+	int count, num, abso;
 
 	count = 0;
 	num = va_arg(args, int);
-
-	if (num < 0)
-		abs = -num;
-	abs = num;
+	abso = num;
 
 	if (num < 0)
 	{
+		/* so it doesn't store the '-' sign */
+		abso = abso * -1;
 		_write('-');
 		count++;
 	}
-
-	while (abs >= 10)
+	/* abso >= 10 so it can be divided by 10 */
+	while (abso >= 10)
 	{
-		abs = abs / 10;
+		abso = abso / 10;
 		count++;
 	}
-
+	/* call the recursive function */
 	print_int_rec(num);
 	return (count);
 }
@@ -85,13 +88,16 @@ int print_int(va_list args)
  */
 void print_int_rec(int num)
 {
-	unsigned int abs; /* chequear si no conviene cambiarle el nombre */
+	/* unsigned to have more space available to store */
+	unsigned int uns_num;
 
+	uns_num = num;
 	if (num < 0)
-		abs = -num;
-	abs = num;
+		uns_num = uns_num * -1;
 
-	if (abs >= 10)
-		print_int_rec(abs / 10);
-	_write((abs % 10) + '0');
+	if (uns_num >= 10)
+		/* calls recursively to itself */
+		print_int_rec(uns_num / 10);
+	/* writes the last digit, that's why it prints forward */
+	_write((uns_num % 10) + '0');
 }
