@@ -23,7 +23,7 @@
 * [About the Project](#about-the-project)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation, compiling and executing](#installation)
+  * [Installation, compiling and executing](#installation-compiling-and-executing)
 * [Usage](#usage)
 * [Authors](#authors)
 
